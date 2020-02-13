@@ -6,7 +6,9 @@ namespace LifeExpectancyApplication
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Life Expectancy App!");
+            LifeExpectancyCalculator LEapp = new LifeExpectancyCalculator();
+            LEapp.Run();
+            Console.ReadKey();
         }
     }
 }
