@@ -12,11 +12,13 @@ namespace LifeExpectancyApplication.Questions
         Posture = 7
     }
 
-    public class OptionalFactor : InfluenceFactor
+    public class OptionalFactor : IInfluenceFactor
     {
         public string Positive { get; set; }
         public string Negative { get; set; }
         public OptionalType TypeOfOptional { get; set; }
+        public FactorTypes TypeOfFactor { get; set; }
+
         public OptionalFactor(OptionalType type, string postiveanswer, string negativeanswer)
         {
             TypeOfFactor = FactorTypes.Optional;
@@ -25,7 +27,7 @@ namespace LifeExpectancyApplication.Questions
             Negative = negativeanswer;
         }
 
-        public override float ConsiderFactor(float age, float modifier, string answer)
+        public float ConsiderFactor(float age, float modifier, string answer)
         {
             if (answer == "1")
                 return age - ((float)TypeOfOptional + ((float)TypeOfOptional * modifier));
@@ -33,12 +35,12 @@ namespace LifeExpectancyApplication.Questions
                 return age - (1 + 1 * modifier);
         }
 
-        public override void DisplayOptions()
+        public void DisplayOptions()
         {
             Console.WriteLine($"\nDo you:\n\n(0) {Positive}\n(1) {Negative}");
         }
 
-        public override bool CheckAnswer(string answer)
+        public bool CheckAnswer(string answer)
         {
             try
             {
@@ -54,7 +56,7 @@ namespace LifeExpectancyApplication.Questions
             return false;
         }
 
-        public override void GetSpecificType()
+        public void GetSpecificType()
         {
             Console.WriteLine($"\n\n-------{(OptionalType)TypeOfOptional} Question--------\n");
         }

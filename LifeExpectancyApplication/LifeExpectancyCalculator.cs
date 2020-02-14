@@ -8,7 +8,7 @@ namespace LifeExpectancyApplication
 {
     public class LifeExpectancyCalculator
     {
-        public List<InfluenceFactor> Questions { get; set; }
+        public List<IInfluenceFactor> Questions { get; set; }
 
         private int CurrentAge { get; set; }
 
@@ -25,7 +25,7 @@ namespace LifeExpectancyApplication
             Brackets.Add("2", "Every 2 months - 5 months");
             Brackets.Add("3", "More than a year - Almost Never");
 
-            Questions = new List<InfluenceFactor>()
+            Questions = new List<IInfluenceFactor>()
             {
                 new QuantitativeFactor(QuantitativeType.Height, "ft"),
                 new QuantitativeFactor(QuantitativeType.Weight, "kg"),
@@ -41,7 +41,7 @@ namespace LifeExpectancyApplication
             ExpectedLife = 120;
         }
 
-        public LifeExpectancyCalculator(List<InfluenceFactor> questions)
+        public LifeExpectancyCalculator(List<IInfluenceFactor> questions)
         {
             Questions = questions;
 
@@ -58,6 +58,9 @@ namespace LifeExpectancyApplication
             {
                 Console.WriteLine("\n\n------Please enter your age to begin-----\n");
                 input = Console.ReadLine();
+
+                
+
                 if(input.All(Char.IsDigit) && Convert.ToInt32(input)>5){
                     CurrentAge = Convert.ToInt32(input);
                     break;
@@ -94,7 +97,7 @@ namespace LifeExpectancyApplication
 
         }
 
-        public float ProcessQuestion(InfluenceFactor question, int age, float modifier, string input)
+        public float ProcessQuestion(IInfluenceFactor question, int age, float modifier, string input)
         {
             question.GetSpecificType();
             do

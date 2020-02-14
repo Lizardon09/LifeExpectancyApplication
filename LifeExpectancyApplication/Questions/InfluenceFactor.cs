@@ -11,17 +11,17 @@ namespace LifeExpectancyApplication
         Optional
     }
 
-    public abstract class InfluenceFactor
+    public interface IInfluenceFactor
     {
-        public FactorTypes TypeOfFactor { get; set; }
+        FactorTypes TypeOfFactor { get; set; }
 
-        public abstract float ConsiderFactor(float age, float modifier, string answer);
+        float ConsiderFactor(float age, float modifier, string answer);
 
-        public abstract bool CheckAnswer(string answer);
+        bool CheckAnswer(string answer);
 
-        public abstract void DisplayOptions();
+        void DisplayOptions();
 
-        public abstract void GetSpecificType();
+        void GetSpecificType();
 
     }
 }

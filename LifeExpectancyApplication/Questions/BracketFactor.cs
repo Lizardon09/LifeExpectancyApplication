@@ -10,10 +10,11 @@ namespace LifeExpectancyApplication.Questions
         Diet = 2
     }
 
-    public class BracketFactor : InfluenceFactor
+    public class BracketFactor : IInfluenceFactor
     {
         Dictionary<string, string> _brackets { get; set; }
         public BracketType TypeOfBracket { get; set; }
+        public FactorTypes TypeOfFactor { get; set; }
 
         public BracketFactor(BracketType type, Dictionary<string, string> brackets)
         {
@@ -22,12 +23,12 @@ namespace LifeExpectancyApplication.Questions
             _brackets = brackets;
         }
 
-        public override float ConsiderFactor(float age, float modifier, string answer)
+        public float ConsiderFactor(float age, float modifier, string answer)
         {
             return age - (((float)TypeOfBracket * (Convert.ToInt64(answer)+1)) + (((float)TypeOfBracket * (Convert.ToInt64(answer) + 1)) * modifier));
         }
 
-        public override void DisplayOptions()
+        public void DisplayOptions()
         {
             foreach (KeyValuePair<string, string> kvp in _brackets)
             {
@@ -36,7 +37,7 @@ namespace LifeExpectancyApplication.Questions
             Console.WriteLine();
         }
 
-        public override bool CheckAnswer(string answer)
+        public bool CheckAnswer(string answer)
         {
             try
             {
@@ -52,7 +53,7 @@ namespace LifeExpectancyApplication.Questions
             return false;
         }
 
-        public override void GetSpecificType()
+        public void GetSpecificType()
         {
             Console.Write($"\n\n-------{(BracketType)TypeOfBracket} Question--------\n");
         }

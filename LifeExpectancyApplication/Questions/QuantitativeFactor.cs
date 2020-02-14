@@ -11,11 +11,12 @@ namespace LifeExpectancyApplication.Questions
         Weight = 20
     }
 
-    public class QuantitativeFactor : InfluenceFactor
+    public class QuantitativeFactor : IInfluenceFactor
     {
         public string Measurement { get; set; }
         public float Quantity { get; set; }
         public QuantitativeType TypeOfQuantitative { get; set; }
+        public FactorTypes TypeOfFactor { get; set; }
 
         public QuantitativeFactor(QuantitativeType type, string measurement)
         {
@@ -24,7 +25,7 @@ namespace LifeExpectancyApplication.Questions
             Measurement = measurement;
         }
 
-        public override float ConsiderFactor(float age, float modifier, string answer)
+        public float ConsiderFactor(float age, float modifier, string answer)
         {
             Quantity = Convert.ToInt64(answer);
 
@@ -33,12 +34,12 @@ namespace LifeExpectancyApplication.Questions
             return modifier;
         }
 
-        public override void DisplayOptions()
+        public void DisplayOptions()
         {
             Console.WriteLine($"\n\nPlease enter your {(QuantitativeType)TypeOfQuantitative}({Measurement}):\n");
         }
 
-        public override bool CheckAnswer(string answer)
+        public bool CheckAnswer(string answer)
         {
             try
             {
@@ -56,7 +57,7 @@ namespace LifeExpectancyApplication.Questions
             return false;
         }
 
-        public override void GetSpecificType()
+        public void GetSpecificType()
         {
             Console.WriteLine($"\n\n-------{(QuantitativeType)TypeOfQuantitative} Question--------\n");
         }
