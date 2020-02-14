@@ -60,5 +60,12 @@ namespace LifeExpectancyApplication.Questions
         {
             Console.WriteLine($"\n\n-------{(OptionalType)TypeOfOptional} Question--------\n");
         }
+
+        public bool Compare(IInfluenceFactor factor)
+        {
+            if (((OptionalFactor)factor).TypeOfOptional == this.TypeOfOptional)
+                return true;
+            return false;
+        }
     }
 }

@@ -57,5 +57,12 @@ namespace LifeExpectancyApplication.Questions
         {
             Console.Write($"\n\n-------{(BracketType)TypeOfBracket} Question--------\n");
         }
+
+        public bool Compare(IInfluenceFactor factor)
+        {
+            if (((BracketFactor)factor).TypeOfBracket == this.TypeOfBracket)
+                return true;
+            return false;
+        }
     }
 }

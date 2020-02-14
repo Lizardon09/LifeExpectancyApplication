@@ -61,5 +61,12 @@ namespace LifeExpectancyApplication.Questions
         {
             Console.WriteLine($"\n\n-------{(QuantitativeType)TypeOfQuantitative} Question--------\n");
         }
+
+        public bool Compare(IInfluenceFactor factor)
+        {
+            if (((QuantitativeFactor)factor).TypeOfQuantitative == this.TypeOfQuantitative)
+                return true;
+            return false;
+        }
     }
 }

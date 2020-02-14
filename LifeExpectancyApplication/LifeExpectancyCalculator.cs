@@ -116,5 +116,17 @@ namespace LifeExpectancyApplication
 
         }
 
+        public void AddQuestion(IInfluenceFactor question)
+        {
+            foreach (var item in Questions.FindAll(delegate (IInfluenceFactor factor) { return factor.TypeOfFactor == question.TypeOfFactor;}))
+            {
+                if (item.Compare(question))
+                {
+                    Console.WriteLine("This question already exists");
+                }
+            }
+
+            Console.WriteLine("Ready to add questions");
+        }
     }
 }

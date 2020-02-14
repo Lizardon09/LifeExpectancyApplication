@@ -23,5 +23,7 @@ namespace LifeExpectancyApplication
 
         void GetSpecificType();
 
+        bool Compare(IInfluenceFactor factor);
+
     }
 }
