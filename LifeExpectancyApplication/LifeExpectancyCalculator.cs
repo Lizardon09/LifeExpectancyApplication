@@ -10,32 +10,30 @@ namespace LifeExpectancyApplication
     {
         public List<InfluenceFactor> Questions { get; set; }
 
-        public int CurrentAge { get; set; }
+        private int CurrentAge { get; set; }
 
-        public int ExpectedLife { get; set; }
+        private int ExpectedLife { get; set; }
 
-        public float Modifier { get; set; }
+        private float Modifier { get; set; }
 
         public LifeExpectancyCalculator()
         {
+            Dictionary<string, string> Brackets = new Dictionary<string, string>();
 
-            List<Tuple<string, string>> brackets = new List<Tuple<string, string>>()
-            {
-                new Tuple<string, string>("Every 2 days", "1 week"),
-                new Tuple<string, string>("Every 2 weeks", "1 month"),
-                new Tuple<string, string>("Every 2 months", "5 months"),
-                new Tuple<string, string>("More than a year", "Almost Never"),
-            };
+            Brackets.Add("0","Every 2 days - 1 week");
+            Brackets.Add("1", "Every 2 weeks - 1 month");
+            Brackets.Add("2", "Every 2 months - 5 months");
+            Brackets.Add("3", "More than a year - Almost Never");
 
             Questions = new List<InfluenceFactor>()
             {
-                new QuantitativeFactor(QuantitativeType.Height, "inch"),
+                new QuantitativeFactor(QuantitativeType.Height, "ft"),
                 new QuantitativeFactor(QuantitativeType.Weight, "kg"),
                 new OptionalFactor(OptionalType.Drink, "Not Drink", "Drink"),
                 new OptionalFactor(OptionalType.Posture,"Have a good posture", "Have a bad posture"),
                 new OptionalFactor(OptionalType.Smoke, "Not Smoke", "Smoke"),
-                new BracketFactor(BracketType.Diet, brackets),
-                new BracketFactor(BracketType.Exercise, brackets)
+                new BracketFactor(BracketType.Diet, Brackets),
+                new BracketFactor(BracketType.Exercise, Brackets)
             };
 
             CurrentAge = 0;
@@ -43,7 +41,16 @@ namespace LifeExpectancyApplication
             ExpectedLife = 120;
         }
 
-        public void Run()
+        public LifeExpectancyCalculator(List<InfluenceFactor> questions)
+        {
+            Questions = questions;
+
+            CurrentAge = 0;
+            Modifier = 0;
+            ExpectedLife = 120;
+        }
+
+        public void StartCalculator()
         {
             string input = "";
 
@@ -98,10 +105,6 @@ namespace LifeExpectancyApplication
                 if (question.CheckAnswer(input))
                 {
                     break;
-                }
-                else
-                {
-                    Console.WriteLine("\nIncorrect input, please try again.");
                 }
 
             } while (true);

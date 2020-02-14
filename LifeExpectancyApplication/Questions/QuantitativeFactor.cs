@@ -7,7 +7,7 @@ namespace LifeExpectancyApplication.Questions
 {
     public enum QuantitativeType
     {
-        Height = 85,
+        Height = 8,
         Weight = 20
     }
 
@@ -31,7 +31,6 @@ namespace LifeExpectancyApplication.Questions
             modifier += (age - (Quantity / (float)TypeOfQuantitative))/100;
 
             return modifier;
-
         }
 
         public override void DisplayOptions()
@@ -41,10 +40,22 @@ namespace LifeExpectancyApplication.Questions
 
         public override bool CheckAnswer(string answer)
         {
-            if (answer.All(Char.IsDigit) && Convert.ToInt64(answer) > 0)
-                return true;
+            try
+            {
+                if(float.Parse(answer) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n"+ex.Message+"\n");
+                return false;
+            }
+            Console.WriteLine("\nInput must be greater than 0, please try again.\n");
             return false;
         }
+
         public override void GetSpecificType()
         {
             Console.WriteLine($"\n\n-------{(QuantitativeType)TypeOfQuantitative} Question--------\n");
